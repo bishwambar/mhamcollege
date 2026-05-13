@@ -1,378 +1,654 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MHAMC</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://kit.fontawesome.com/925b42fc35.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>মোল্লাপাড়া হাজী আব্দু মিয়া কলেজ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&family=Noto+Sans+Bengali:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0d2b5e;
+      --navy-mid: #1a3f82;
+      --blue: #2563b0;
+      --blue-light: #3b82d4;
+      --accent: #e8a020;
+      --accent-light: #f5c155;
+      --red: #c0392b;
+      --white: #ffffff;
+      --offwhite: #f4f6fb;
+      --gray-light: #edf0f7;
+      --gray-mid: #b0bdd4;
+      --text: #1a2340;
+      --text-mid: #3d4f6e;
+      --text-light: #6b7fa3;
+      --shadow-sm: 0 2px 12px rgba(13,43,94,0.08);
+      --shadow: 0 6px 28px rgba(13,43,94,0.12);
+      --radius: 10px;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans Bengali', sans-serif; background: var(--offwhite); color: var(--text); font-size: 15px; line-height: 1.6; }
+
+    /* TOPBAR */
+    .topbar { background: var(--navy); color: var(--gray-mid); font-size: 0.76rem; padding: 7px 0; border-bottom: 2px solid var(--accent); }
+    .topbar-inner { max-width: 1200px; margin: 0 auto; padding: 0 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; }
+    .topbar-left, .topbar-right { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+
+    /* HEADER */
+    header { background: var(--white); border-bottom: 1px solid #dce4f5; box-shadow: var(--shadow-sm); }
+    .header-inner { max-width: 1200px; margin: 0 auto; padding: 20px 32px; display: flex; align-items: center; gap: 22px; }
+    .college-crest { width: 86px; height: 86px; flex-shrink: 0; background: linear-gradient(145deg, var(--navy) 0%, var(--blue) 100%); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 4px solid var(--accent); box-shadow: 0 0 0 2px var(--navy), 0 6px 20px rgba(13,43,94,0.25); }
+    .crest-book { font-size: 1.9rem; line-height: 1; }
+    .crest-year { font-size: 0.58rem; color: var(--accent-light); font-weight: 600; letter-spacing: 0.08em; margin-top: 3px; }
+    .header-text { flex: 1; }
+    .header-text h1 { font-family: 'Noto Serif Bengali', serif; font-size: 1.85rem; font-weight: 700; color: var(--navy); line-height: 1.2; }
+    .header-meta { display: flex; gap: 18px; margin-top: 7px; flex-wrap: wrap; }
+    .header-meta span { font-size: 0.78rem; color: var(--text-light); }
+    .header-meta span strong { color: var(--navy); font-weight: 600; }
+    .header-right { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; flex-shrink: 0; }
+    .btn-primary { background: linear-gradient(135deg, var(--blue), var(--navy)); color: white; padding: 10px 22px; border-radius: 6px; font-size: 0.82rem; font-weight: 600; text-decoration: none; display: inline-block; box-shadow: 0 4px 12px rgba(37,99,176,0.3); transition: opacity 0.2s, transform 0.2s; }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-outline { border: 2px solid var(--blue); color: var(--blue); padding: 8px 20px; border-radius: 6px; font-size: 0.82rem; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.2s; }
+    .btn-outline:hover { background: var(--blue); color: white; }
+
+    /* NAV */
+    nav { background: var(--navy-mid); position: sticky; top: 0; z-index: 999; box-shadow: 0 3px 16px rgba(13,43,94,0.2); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 32px; display: flex; overflow-x: auto; }
+    nav a { color: #c5d4f0; text-decoration: none; padding: 15px 20px; font-size: 0.86rem; font-weight: 500; white-space: nowrap; border-bottom: 3px solid transparent; transition: all 0.2s; display: block; }
+    nav a:hover, nav a.active { color: var(--white); border-bottom-color: var(--accent); background: rgba(255,255,255,0.06); }
+
+    /* MARQUEE */
+    .marquee-wrap { background: var(--accent); overflow: hidden; display: flex; align-items: stretch; }
+    .marquee-label { background: var(--red); color: white; font-size: 0.74rem; font-weight: 700; padding: 9px 16px; letter-spacing: 0.07em; white-space: nowrap; display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
+    .marquee-track { overflow: hidden; flex: 1; }
+    .marquee-inner { display: inline-flex; animation: marquee 30s linear infinite; white-space: nowrap; padding: 9px 0; }
+    .marquee-inner span { padding: 0 32px; font-size: 0.81rem; font-weight: 600; color: var(--navy); }
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* HERO */
+    .hero { background: linear-gradient(155deg, var(--navy) 0%, var(--navy-mid) 50%, var(--blue) 100%); color: white; padding: 60px 32px 56px; position: relative; overflow: hidden; }
+    .hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 360px; gap: 56px; align-items: center; }
+    .hero::before { content: ''; position: absolute; right: -100px; top: -100px; width: 480px; height: 480px; border-radius: 50%; background: rgba(255,255,255,0.03); pointer-events: none; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(232,160,32,0.15); border: 1px solid rgba(232,160,32,0.4); color: var(--accent-light); font-size: 0.75rem; font-weight: 600; padding: 5px 14px; border-radius: 20px; margin-bottom: 16px; }
+    .hero h2 { font-family: 'Noto Serif Bengali', serif; font-size: 2.25rem; font-weight: 700; line-height: 1.3; margin-bottom: 18px; }
+    .hero h2 span { color: var(--accent-light); }
+    .hero p { font-size: 0.93rem; color: #a8bde0; line-height: 1.95; margin-bottom: 28px; max-width: 500px; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-btn-p { background: var(--accent); color: var(--navy); padding: 13px 28px; border-radius: 7px; font-size: 0.88rem; font-weight: 700; text-decoration: none; transition: all 0.2s; box-shadow: 0 4px 16px rgba(232,160,32,0.35); }
+    .hero-btn-p:hover { background: var(--accent-light); transform: translateY(-2px); }
+    .hero-btn-g { border: 2px solid rgba(255,255,255,0.35); color: white; padding: 11px 26px; border-radius: 7px; font-size: 0.88rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+    .hero-btn-g:hover { background: rgba(255,255,255,0.1); }
+    .stats-box { background: rgba(255,255,255,0.06); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 30px 26px; display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .stat-item { text-align: center; }
+    .stat-num { font-family: 'Noto Serif Bengali', serif; font-size: 1.9rem; font-weight: 700; color: var(--accent-light); display: block; line-height: 1; margin-bottom: 6px; }
+    .stat-lbl { font-size: 0.74rem; color: #8ea8d0; line-height: 1.4; }
+    .stat-div { grid-column: 1/-1; height: 1px; background: rgba(255,255,255,0.08); }
+
+    /* PAGE BODY */
+    .page-body { max-width: 1200px; margin: 0 auto; padding: 36px 32px; display: grid; grid-template-columns: 1fr 296px; gap: 28px; align-items: start; }
+
+    /* SECTION HEADING */
+    .sec-head { display: flex; align-items: center; margin-bottom: 22px; }
+    .sec-bar { width: 5px; height: 26px; background: linear-gradient(180deg, var(--accent), var(--blue)); border-radius: 3px; margin-right: 13px; flex-shrink: 0; }
+    .sec-head h2 { font-family: 'Noto Serif Bengali', serif; font-size: 1.2rem; font-weight: 700; color: var(--navy); }
+    .sec-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--gray-mid), transparent); margin-left: 14px; }
+
+    /* CARD */
+    .card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid #dce4f5; }
+    .card-head { padding: 14px 24px; font-weight: 700; font-size: 0.88rem; display: flex; align-items: center; gap: 9px; color: white; border-radius: var(--radius) var(--radius) 0 0; }
+    .ch-blue { background: linear-gradient(135deg, var(--navy), var(--blue)); }
+    .ch-green { background: linear-gradient(135deg, #1a5030, #2e8b57); }
+
+    /* ABOUT */
+    .about-body { padding: 22px 24px; }
+    .about-body p { font-size: 0.87rem; color: var(--text-mid); line-height: 2; margin-bottom: 12px; }
+    .about-body p:last-child { margin-bottom: 0; }
+
+    /* LEADERSHIP */
+    .leader-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-bottom: 28px; }
+    .lc { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid #dce4f5; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; text-align: center; }
+    .lc:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .lc-top { padding: 26px 18px 14px; background: linear-gradient(160deg, var(--offwhite), var(--gray-light)); }
+    .lc-av { width: 76px; height: 76px; border-radius: 50%; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-family: 'Noto Serif Bengali', serif; font-size: 1.7rem; font-weight: 700; color: white; box-shadow: 0 4px 16px rgba(0,0,0,0.18); }
+    .av-p { background: linear-gradient(145deg, #0d2b5e, #2563b0); }
+    .av-f { background: linear-gradient(145deg, #7c1d1d, #c0392b); }
+    .av-a { background: linear-gradient(145deg, #1a5030, #2e8b57); }
+    .lc-role { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; padding: 3px 12px; border-radius: 20px; display: inline-block; margin-bottom: 8px; }
+    .rp { background: #e8f0fb; color: var(--navy); }
+    .rf { background: #fde8e8; color: #c0392b; }
+    .ra { background: #e8f5ee; color: #1a7a3a; }
+    .lc-name { font-family: 'Noto Serif Bengali', serif; font-size: 0.97rem; font-weight: 700; color: var(--navy); line-height: 1.35; }
+    .lc-bot { padding: 12px 18px 16px; border-top: 1px solid var(--gray-light); font-size: 0.76rem; color: var(--text-light); line-height: 1.85; }
+    .lc-bot strong { color: var(--text-mid); }
+
+    /* FACULTY */
+    .fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(158px, 1fr)); gap: 15px; }
+    .fc { background: var(--white); border-radius: var(--radius); border: 1px solid #dce4f5; box-shadow: var(--shadow-sm); padding: 18px 12px 15px; text-align: center; transition: transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden; }
+    .fc::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--blue), var(--accent)); border-radius: 0 0 var(--radius) var(--radius); opacity: 0; transition: opacity 0.2s; }
+    .fc:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .fc:hover::after { opacity: 1; }
+    .fc-num { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(145deg, var(--navy-mid), var(--blue-light)); color: white; font-family: 'Noto Serif Bengali', serif; font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 11px; box-shadow: 0 4px 12px rgba(37,99,176,0.22); }
+    .fc-badge { font-size: 0.63rem; font-weight: 700; background: var(--gray-light); color: var(--navy); padding: 2px 9px; border-radius: 20px; display: inline-block; margin-bottom: 7px; }
+    .fc-name { font-family: 'Noto Serif Bengali', serif; font-size: 0.88rem; font-weight: 700; color: var(--navy); line-height: 1.4; margin-bottom: 4px; }
+    .fc-sub { font-size: 0.73rem; color: var(--blue); font-weight: 500; margin-bottom: 3px; }
+    .fc-edu { font-size: 0.68rem; color: var(--text-light); }
+
+    /* NOTICE */
+    .n-list { list-style: none; }
+    .n-row { display: flex; align-items: flex-start; gap: 14px; padding: 14px 24px; border-bottom: 1px solid var(--gray-light); transition: background 0.15s; }
+    .n-row:last-child { border-bottom: none; }
+    .n-row:hover { background: #f0f4fb; }
+    .n-date { flex-shrink: 0; background: var(--navy); color: white; border-radius: 6px; padding: 6px 10px; text-align: center; min-width: 50px; }
+    .n-day { font-family: 'Noto Serif Bengali', serif; font-size: 1.1rem; font-weight: 700; line-height: 1; display: block; }
+    .n-month { font-size: 0.62rem; display: block; color: var(--gray-mid); margin-top: 2px; }
+    .n-body { flex: 1; }
+    .n-tag { display: inline-block; font-size: 0.63rem; font-weight: 700; padding: 2px 8px; border-radius: 3px; margin-bottom: 5px; letter-spacing: 0.05em; text-transform: uppercase; }
+    .nt-u { background: #fde8e8; color: #c0392b; }
+    .nt-e { background: #e8f4fd; color: #1a5fa8; }
+    .nt-h { background: #eef8ee; color: #1a7a3a; }
+    .nt-g { background: #fdf4e3; color: #8a6010; }
+    .nt-r { background: #f3e8fd; color: #6b2fa0; }
+    .n-title { font-size: 0.87rem; font-weight: 600; color: var(--text); line-height: 1.5; margin-bottom: 2px; }
+    .n-sub { font-size: 0.73rem; color: var(--text-light); }
+
+    /* ADMISSION */
+    .adm-grid { display: grid; grid-template-columns: 1fr 1fr; }
+    .adm-item { padding: 13px 24px; border-bottom: 1px solid var(--gray-light); border-right: 1px solid var(--gray-light); }
+    .adm-item:nth-child(even) { border-right: none; }
+    .adm-item:nth-last-child(-n+2) { border-bottom: none; }
+    .adm-lbl { font-size: 0.7rem; font-weight: 700; color: var(--text-light); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 4px; }
+    .adm-val { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+
+    /* SIDEBAR WIDGETS */
+    .sidebar { display: flex; flex-direction: column; gap: 20px; }
+    .sw { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid #dce4f5; overflow: hidden; }
+    .sw-head { padding: 12px 18px; font-weight: 700; font-size: 0.83rem; border-bottom: 1px solid var(--gray-light); display: flex; align-items: center; gap: 8px; color: var(--navy); }
+    .sw-bar { width: 4px; height: 15px; background: var(--accent); border-radius: 2px; }
+    .sw-body { padding: 14px 18px; }
+    .ir-list { list-style: none; }
+    .ir-row { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--gray-light); font-size: 0.79rem; }
+    .ir-row:last-child { border-bottom: none; }
+    .ir-l { color: var(--text-light); min-width: 68px; flex-shrink: 0; font-size: 0.74rem; }
+    .ir-v { color: var(--text); font-weight: 500; }
+    .ql-list { list-style: none; }
+    .ql-list li a { display: flex; align-items: center; gap: 10px; padding: 9px 0; font-size: 0.82rem; font-weight: 500; color: var(--text-mid); text-decoration: none; border-bottom: 1px solid var(--gray-light); transition: color 0.15s; }
+    .ql-list li:last-child a { border-bottom: none; }
+    .ql-list li a:hover { color: var(--blue); }
+    .ql-icon { width: 26px; height: 26px; background: var(--gray-light); border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 0.82rem; flex-shrink: 0; }
+    .cal-list { list-style: none; }
+    .cal-row { display: flex; gap: 11px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid var(--gray-light); font-size: 0.79rem; }
+    .cal-row:last-child { border-bottom: none; }
+    .cal-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+    .cd-b { background: var(--blue); } .cd-r { background: var(--red); } .cd-g { background: #2e8b57; } .cd-y { background: var(--accent); }
+    .cal-t { color: var(--text-mid); font-weight: 500; line-height: 1.5; }
+    .cal-d { color: var(--text-light); font-size: 0.71rem; margin-top: 1px; }
+    .sr-list { list-style: none; }
+    .sr-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid var(--gray-light); font-size: 0.8rem; }
+    .sr-row:last-child { border-bottom: none; }
+    .sr-lbl { color: var(--text-mid); }
+    .sr-val { font-family: 'Noto Serif Bengali', serif; font-size: 1rem; font-weight: 700; color: var(--navy); }
+    .sr-bw { flex: 1; margin: 0 11px; height: 4px; background: var(--gray-light); border-radius: 2px; overflow: hidden; }
+    .sr-b { height: 100%; background: linear-gradient(90deg, var(--blue), var(--accent)); border-radius: 2px; }
+
+    /* SECTION SPACING */
+    .mb { margin-bottom: 26px; }
+
+    /* FOOTER */
+    footer { background: var(--navy); color: #8aa0c8; margin-top: 12px; }
+    .ft { max-width: 1200px; margin: 0 auto; padding: 42px 32px 30px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 38px; }
+    footer h4 { font-family: 'Noto Serif Bengali', serif; color: var(--white); font-size: 0.93rem; margin-bottom: 14px; padding-bottom: 9px; border-bottom: 2px solid rgba(232,160,32,0.35); }
+    footer p, footer li { font-size: 0.79rem; line-height: 2; list-style: none; }
+    footer a { color: #8aa0c8; text-decoration: none; transition: color 0.15s; }
+    footer a:hover { color: var(--accent-light); }
+    .fb { border-top: 1px solid rgba(255,255,255,0.07); padding: 14px 32px; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; color: #4e6490; flex-wrap: wrap; gap: 6px; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .page-body { grid-template-columns: 1fr; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .stats-box { display: none; }
+      .leader-grid { grid-template-columns: 1fr 1fr; }
+      .ft { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .header-inner { flex-direction: column; text-align: center; gap: 14px; }
+      .header-right { align-items: center; }
+      .header-meta { justify-content: center; }
+      .leader-grid { grid-template-columns: 1fr; }
+      .adm-grid { grid-template-columns: 1fr; }
+      .adm-item { border-right: none !important; }
+      .ft { grid-template-columns: 1fr; gap: 22px; }
+      .fb { flex-direction: column; text-align: center; }
+      .hero h2 { font-size: 1.65rem; }
+      .page-body { padding: 24px 16px; }
+      header .header-inner { padding: 16px; }
+      .n-row { padding: 12px 16px; }
+      .about-body { padding: 18px 16px; }
+      .adm-item { padding: 12px 16px; }
+    }
+  </style>
 </head>
 <body>
-    <div id="header">
-        <div class="container">
-            <nav>
-                <ul id="sidemenu">
-                    <li><a href="#header">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#result">Result</a></li>
-                    <li><a href="#teacher">Teachers</a></li>
-                </ul>
-                <i class="fa-solid fa-bars" onclick="openmenu()"></i>
-            </nav>
-            
-        </div>
-    </div>
-  
-    
-    <!--about Section-->
-    <div id="about">
-        <div class="container">
-        <div class="row">
-                
-                <div class="about-col-2">
-                    <h3>EIIN- 137660 </h3>
-                    <h1 class="sub-title">About</h1>
-                    <p>we are dedicated to nurturing young minds and helping students excel in their academic journey. Our college provides comprehensive services for students, offering a supportive and conducive learning environment. 
-                        <br> What sets us apart is our team of highly qualified and experienced teachers who are passionate about education. They are committed to providing personalized attention to each student, understanding their strengths, weaknesses, and individual learning styles. With their guidance and expertise, we strive to unleash the full potential of every student.<br> 
-                        Join us and embark on a transformative educational journey. Let us guide you towards academic excellence, personal growth, and a brighter future. Contact us today to enroll or to learn more about our college. Together, we can achieve greatness!</p>
 
-                    
-                </div>
-            </div>
-        </div>
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <span>📍 মোল্লাপাড়া,ওসমানীনগর,সিলেট</span>
+      <span>|</span>
+      <span>📞 ০১৭২৮০০২৪৯৯</span>
+      <span>|</span>
+      <span>✉ amiahcollege@gmail.com</span>
     </div>
-<br>
-    <br>
-    <!--Event Section-->
+    <div class="topbar-right">
+      <span>EIIN: 137660</span>
+      <span>|</span>
+    </div>
+  </div>
+</div>
 
-    <div class="container">
-        <div class="row">
-                
-                <div class="about-col-2">
-                    <h1 class="sub-title">Events</h1>
-                
-    <div class="main-carousel">
-        <div class="cell"><img src="s1.jpeg"></div>
-        <div class="cell"><img src="s2.jpeg"></div>
-        <div class="cell"><img src="s3.jpeg"></div>
-        <div class="cell"><img src="s4.jpg"></div>
-        <div class="cell"><img src="s5.jpg"></div>
-        <div class="cell"><img src="s6.jpg"></div>
-        
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="college-crest">
+      
+      <span class="crest-year">EST. ২০১৪</span>
+    </div>
+    <div class="header-text">
+      <h1>মোল্লাপাড়া হাজী আব্দু মিয়া কলেজ</h1>
+      <div class="header-meta">
+        <span>🏛️ উচ্চ মাধ্যমিক স্তর</span>
+        <span>📌 <strong>মানবিক | ব্যবসায় শিক্ষা</strong></span>
+        <span>✅ বোর্ড অনুমোদিত</span>
       </div>
-
-    <script src="flickity.pkgd.js"></script>
-    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
-    <script type="text/javascript">
-        $('.main-carousel').flickity({
-  // options
-  cellAlign: 'left',
-  wraAround: true,
-  autoPlay: 1600,
-  freeScroll: true
-});
-    </script>
-
- </div>
-        </div>
     </div>
-</div>
-</div>
-<br>
-    <br>
-    <br>
- <!--Notice Section-->
-    <div id="notice">
-        <div class="container">
-        <div class="row">
-                
-                <div class="about-col-2">
-                    <h1 class="sub-title">Notice</h1>
-                    <p>This is to inform all students that classes will be suspended from March 2, 2025, to April 3, 2025, on the occasion of the holy month of Ramadan, Doljatra, Independence and National Day, Jumu'atul-Wida, Lailatul Qadr, Eid-ul-Fitr, and Summer Vacation.</p>
-                </div>
-            </div>
-        </div>
+    <div class="header-right">
+      <a href="#admission" class="btn-primary">ভর্তি তথ্য</a>
+      <a href="#notice" class="btn-outline">নোটিশ বোর্ড</a>
     </div>
-<br>
-<br>
-<br>
-    <!----------Teacher------------->
-<div id="teacher">
-    <div class="container">
-        <h1 class="sub-title">Teachers info</h1>
-        <div class="work-list">
-            <div class="work">
-                <img src="images.png">
-                <div class="layer">
-                    <h3>Prof. Mahmud Miah</h3>
-                    <p>Principal</p>
-                  <!--  <a href="https://www.fashanka.nath.5">
-                        <i class="fa-brands fa-whatsapp"></i> </a>-->
-                </div>
-            </div>
+  </div>
+</header>
 
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="active">হোম</a>
+    <a href="#about">কলেজ পরিচিতি</a>
+    
+    <a href="#faculty">শিক্ষকমণ্ডলী</a>
+    <a href="#notice">নোটিশ বোর্ড</a>
+    <a href="#admission">ভর্তি তথ্য</a>
+    <a href="#contact">যোগাযোগ</a>
+  </div>
+</nav>
 
-            <div class="work">
-                <img src="koyes.jpeg">
-                <div class="layer">
-                    <h3>Koyes Ahmed</h3>
-                    <p>Lecturer in Bangla</p>
-                    <a href="https://wa.me/qr/3O7KFVQE4YWBH1">
-                        <i class="fa-brands fa-whatsapp"></i> </a>
-                </div>
-            </div>
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-label">📢 বিজ্ঞপ্তি</div>
+  <div class="marquee-track">
+    <div class="marquee-inner">
+      <!-- ✏️ মার্কি টেক্সট এখানে পরিবর্তন করুন -->
+      <span>২০২৫-২৬ শিক্ষাবর্ষে একাদশ শ্রেণিতে ভর্তি চলছে</span>
+      <span>এইচএসসি প্রাক-নির্বাচনী পরীক্ষার সময়সূচি প্রকাশিত</span>
+      <span>বার্ষিক ক্রীড়া প্রতিযোগিতা শীঘ্রই অনুষ্ঠিত হবে</span>
+      <span>অভিভাবক সমাবেশ আগামী সপ্তাহে অনুষ্ঠিত হবে</span>
+      <span>২০২৫-২৬ শিক্ষাবর্ষে একাদশ শ্রেণিতে ভর্তি চলছে</span>
+      <span>এইচএসসি প্রাক-নির্বাচনী পরীক্ষার সময়সূচি প্রকাশিত</span>
+      <span>বার্ষিক ক্রীড়া প্রতিযোগিতা শীঘ্রই অনুষ্ঠিত হবে</span>
+      <span>অভিভাবক সমাবেশ আগামী সপ্তাহে অনুষ্ঠিত হবে</span>
+    </div>
+  </div>
+</div>
 
-             <div class="work">
-                <img src="images.png">
-                <div class="layer">
-                    <h3>Rubina Akthar</h3>
-                    <p>Lecturer in Economics
-                    </p>
-                 <!--   <a href="https://www.fahwambarc"><i class="fa-brands fa-facebook"></i>
-                        
-                    </a>-->
-                </div>
-            </div>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">🎓 উচ্চমানের শিক্ষা প্রতিষ্ঠান</div>
+      <h2>শিক্ষার আলোয় গড়ি<br><span>উজ্জ্বল আগামী</span></h2>
+      <p>মোল্লাপাড়া হাজী আব্দু মিয়া কলেজ অভিজ্ঞ শিক্ষকমণ্ডলী, আধুনিক শিক্ষা পদ্ধতি এবং সুষ্ঠু পরিবেশের মাধ্যমে শিক্ষার্থীদের সামগ্রিক বিকাশে নিরলসভাবে কাজ করে যাচ্ছে।</p>
+      <div class="hero-btns">
+        <a href="#admission" class="hero-btn-p">ভর্তি হোন</a>
+        <a href="#about" class="hero-btn-g">আরও জানুন</a>
+      </div>
+    </div>
+    <div class="stats-box">
+      <div class="stat-item"><span class="stat-num">১১</span><span class="stat-lbl">অভিজ্ঞ প্রভাষক</span></div>
+      <div class="stat-item"><span class="stat-num">২টি</span><span class="stat-lbl">একাডেমিক বিভাগ</span></div>
+      <div class="stat-div"></div>
+      <div class="stat-item"><span class="stat-num">২০০+</span><span class="stat-lbl">মোট শিক্ষার্থী</span></div>
+      <div class="stat-item"><span class="stat-num">৭০%</span><span class="stat-lbl">পাসের হার</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- BODY -->
+<div class="page-body">
+  <div>
+
+    <!-- ABOUT -->
+    <section id="about" class="mb">
+      <div class="sec-head"><div class="sec-bar"></div><h2>কলেজ পরিচিতি</h2><div class="sec-line"></div></div>
+      <div class="card">
+        <div class="card-head ch-blue"><span>🏛️</span> আমাদের সম্পর্কে</div>
+        <div class="about-body">
+          <p>মোল্লাপাড়া হাজী আব্দু মিয়া কলেজ এই অঞ্চলের উচ্চশিক্ষা বিস্তারে একটি গুরুত্বপূর্ণ প্রতিষ্ঠান হিসেবে নিজেকে প্রতিষ্ঠিত করেছে। প্রতিষ্ঠার পর থেকে কলেজটি মানবিক ও ব্যবসায় শিক্ষা বিভাগে হাজারো শিক্ষার্থীকে উচ্চমাধ্যমিক শিক্ষা প্রদান করে আসছে।</p>
+          <p><!-- ✏️ কলেজ পরিচিতির বিবরণ এখানে পরিবর্তন করুন --> হাজী আওলাদ মিয়ার স্বপ্ন ছিল এই এলাকার শিক্ষার্থীরা যেন দরিদ্রতা বা দূরত্বের কারণে উচ্চশিক্ষা থেকে বঞ্চিত না হয়। সেই মহৎ উদ্যোগে স্থাপিত এই কলেজটি আজও সেই আদর্শকে সামনে রেখে শিক্ষার্থীদের সেবায় নিবেদিত।</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEADERSHIP -->
+    <section id="leadership" class="mb">
+      <div class="sec-head"><div class="sec-bar"></div><h2>নেতৃত্বমণ্ডলী</h2><div class="sec-line"></div></div>
+      <div class="leader-grid">
+
+        <!-- ✏️ অধ্যক্ষের তথ্য পরিবর্তন করুন -->
+        <div class="lc">
+          <div class="lc-top">
+            <div class="lc-av av-p">অ</div>
+            <span class="lc-role rp">অধ্যক্ষ</span>
+            <div class="lc-name">প্রফেসর মাহমুদ মিয়া</div>
+          </div>
+          <div class="lc-bot">
+            <strong>শিক্ষাগত যোগ্যতা:</strong>BCS<br>
+            <strong>বিষয়:</strong> সাধারন শিক্ষা <br>
+            <strong>অভিজ্ঞতা:</strong> ২৫ বছর<br>
+            <strong>ফোন:</strong> ০১৭১২০৭১৫৯৬
+          </div>
+        </div>
+
+        <!-- ✏️ প্রতিষ্ঠাতা সভাপতির তথ্য পরিবর্তন করুন -->
+        <div class="lc">
+          <div class="lc-top">
+            <div class="lc-av av-f">প</div>
+            <span class="lc-role rf">প্রতিষ্ঠাতা সভাপতি</span>
+            <div class="lc-name">হাজী আওলাদ মিয়া</div>
+          </div>
+          <div class="lc-bot">
+            <br>
+            <strong>প্রতিষ্ঠাকাল:</strong> ২০১৪<br>
             
-
-            <div class="work">
-                <img src="shahin.jpg">
-                <div class="layer">
-                    <h3>Shahin Alam</h3>
-                    <p>Lecturer in Civics</p>
-                 <!--   <a href="https://www.fle.php?id0821605742">
-                        <i class="fa-brands fa-whatsapp"></i>
-                    </a> -->
-                </div>
-            </div>
-          
-
-            <div class="work">
-                <img src="images.png">
-                <div class="layer">
-                    <h3>Allama Iqbal Mondol</h3>
-                    <p>Lecturer in Islamic History</p>
-                  <!--  <a href="https://www.falakasher.chand.549">
-                        <i class="fa-brands fa-whatsapp"></i>
-                    </a>-->
-                </div>
-            </div>
-
-            <div class="work">
-                <img src="alamgir.jpg">
-                <div class="layer">
-                    <h3>Abdullah Bin Alamgir</h3>
-                    <p>Lecturer in Production Management and Marketing</p>
-                   <a href="https://wa.me/qr/RNEQMKY3V6R5C1">
-                        <i class="fa-brands fa-whatsapp"></i>
-                    </a>
-                </div>
-            </div>
-
-        <div class="work">
-            <img src= "images.png">
-            <div class="layer">
-                <h3>Yesmin Akther</h3>
-                <p>Lecturer in Logic</p>
-    
-            </div>
-        </div>
-    
-        <div class="work">
-            <img src="bilash.jpeg">
-            <div class="layer">
-                <h3>Bilash Kanti Roy</h3>
-                <p>
-                    Lecturer in English
-                </p>
-                <a href="https://wa.me/qr/5SKWFYSDMHN5N1"><i class="fa-brands fa-whatsapp"></i>
-                </a>
-            </div>
+          </div>
         </div>
 
-        <div class="work">
-            <img src="images.png">
-            <div class="layer">
-                <h3>Helal Uddin</h3>
-                <p>Lecturer in Accounting</p>
-           <!--     <a href="https://www.facebhsh.das">
-                    <i class="fa-brands fa-whatsapp"></i>
-                </a>-->
-            </div>
+        <!-- ✏️ হিসাবরক্ষকের তথ্য পরিবর্তন করুন -->
+        <div class="lc">
+          <div class="lc-top">
+            <div class="lc-av av-a">হি</div>
+            <span class="lc-role ra">হিসাবরক্ষক</span>
+            <div class="lc-name">তফোজ্জল হোসেন</div>
+          </div>
+          <div class="lc-bot">
+            <strong>শিক্ষাগত যোগ্যতা:</strong> <br>
+            <strong>অভিজ্ঞতা:</strong> ১৩ বছর<br>
+            
+            <strong>ফোন:</strong> ০১৭১৯৫৭৮৯৮৪ 
+          </div>
         </div>
 
-        <div class="work">
-            <img src="bishwambar.jpeg">
-            <div class="layer">
-                <h3>Bishwambar Chakrobarty Joy</h3>
-                <p>Lecturer in ICT</p>
-                <a href="https://wa.me/qr/SJOSRB4UYPXUL1">
-                    <i class="fa-brands fa-whatsapp"></i>
-                </a>
-            </div>
-        </div>
+      </div>
+    </section>
 
-          <div class="work">
-            <img src="shankarray.jpg">
-            <div class="layer">
-                <h3>Shankar Ray</h3>
-                <p>Lecturer in Business Org.</p>
-            <!--    <a href="">
-                    <i class="fa-brands fa-whatsapp"></i>
-                </a>-->
-            </div>
-        </div>
-          <div class="work">
-            <img src="images.png">
-            <div class="layer">
-                <h3>Tamal Banik</h3>
-                <p>Lecturer in Sociology</p>
-             <!--   <a href="">
-                    <i class="fa-brands fa-whatsapp"></i>
-                </a>-->
-            </div>
-        </div>
+    <!-- FACULTY -->
+    <section id="faculty" class="mb">
+      <div class="sec-head"><div class="sec-bar"></div><h2>প্রভাষকমণ্ডলী</h2><div class="sec-line"></div></div>
+      <div class="fc-grid">
 
+        <!-- ✏️ প্রতিটি প্রভাষকের নাম, বিষয় ও ডিগ্রি পরিবর্তন  -->
+
+        <div class="fc"><div class="fc-num">১</div><span class="fc-badge">প্রভাষক</span>
+          <div class="fc-name">কয়েস</div><div class="fc-sub">বাংলা</div><div class="fc-edu"></div></div>
+
+        <div class="fc"><div class="fc-num">২</div><span class="fc-badge">প্রভাষক</span>
+          <div class="fc-name">রুবিনা বেগম</div><div class="fc-sub">অর্থনীতি</div><div class="fc-edu"></div></div>
+
+        <div class="fc"><div class="fc-num">৩</div><span class="fc-badge">প্রভাষক</span>
+          <div class="fc-name">শাহীন আলম</div><div class="fc-sub">পৌরনীতি</div><div class="fc-edu"></div></div>
+
+        <div class="fc"><div class="fc-num">৪</div><span class="fc-badge">প্রভাষক</span>
+          <div class="fc-name">আলমগীর</div><div class="fc-sub">উৎপাদন ব্যাবস্থাপনা</div><div class="fc-edu"></div></div>
+
+        <div class="fc"><div class="fc-num">৫</div><span class="fc-badge">প্রভাষক</span>
+          <div class="fc-name">আল্লাম্মা ইকবাল মণ্ডল</div><div class="fc-sub">ইসলামের ইতিহাস</div><div class="fc-edu"></div></div>
+
+        <div class="fc"><div class="fc-num">৬</div><span class="fc-badge">প্রভাষক</span>
+          <div class="fc-name">হেলাল উদ্দিন</div><div class="fc-sub">হিসাববিজ্ঞান</div><div class="fc-edu"></div></div>
+
+        <div class="fc"><div class="fc-num">৭</div><span class="fc-badge">প্রভাষক</span>
+          <div class="fc-name">বিশ্বাম্ভর চক্রবর্তী জয়</div><div class="fc-sub">তথ্য ও যোগাযোগ প্রযুক্তি</div><div class="fc-edu"></div></div>
+
+        <div class="fc"><div class="fc-num">৮</div><span class="fc-badge">প্রভাষক</span>
+          <div class="fc-name">শংকর রায় </div><div class="fc-sub">ব্যাবসায় সংগঠন</div><div class="fc-edu"></div></div>
+
+        <div class="fc"><div class="fc-num">৯</div><span class="fc-badge">প্রভাষক</span>
+          <div class="fc-name">তমাল বণিক</div><div class="fc-sub">সমাজবিজ্ঞান</div><div class="fc-edu"></div></div>
+
+        <div class="fc"><div class="fc-num">১০</div><span class="fc-badge">প্রভাষক</span>
+          <div class="fc-name">ফাতেমা বেগম উষা</div><div class="fc-sub">যুক্তিবিদ্যা </div><div class="fc-edu"></div></div>
+
+        <div class="fc"><div class="fc-num">১১</div><span class="fc-badge">প্রভাষক</span>
+          <div class="fc-name">পূজা রাণী নাথ</div><div class="fc-sub">ইংরেজী</div><div class="fc-edu"></div></div>
+
+      </div>
+    </section>
+
+    <!-- NOTICE -->
+    <section id="notice" class="mb">
+      <div class="sec-head"><div class="sec-bar"></div><h2>নোটিশ বোর্ড</h2><div class="sec-line"></div></div>
+      <div class="card">
+        <div class="card-head ch-blue"><span>📋</span> সর্বশেষ বিজ্ঞপ্তি</div>
+        <ul class="n-list">
+          <!--
+          ✏️ নোটিশ যোগ বা পরিবর্তন করতে:
+          - নিচের <li class="n-row"> কপি করুন
+          - n-tag class:  nt-u=জরুরি(লাল)  nt-e=পরীক্ষা(নীল)  nt-h=ছুটি(সবুজ)  nt-g=সাধারণ(হলুদ)  nt-r=ফলাফল(বেগুনি)
+          - n-day ও n-month এ তারিখ দিন
+          -->
+
+          <li class="n-row">
+            <div class="n-date"><span class="n-day">[তা]</span><span class="n-month">[মাস]</span></div>
+            <div class="n-body">
+              <span class="n-tag nt-u">জরুরি বিজ্ঞপ্তি</span>
+              <div class="n-title">২০২৫-২৬ শিক্ষাবর্ষে একাদশ শ্রেণিতে ভর্তি কার্যক্রম শুরু হয়েছে</div>
+              <div class="n-sub">বিস্তারিত জানতে কলেজ অফিসে যোগাযোগ করুন</div>
+            </div>
+          </li>
+
+          <li class="n-row">
+            <div class="n-date"><span class="n-day">[তা]</span><span class="n-month">[মাস]</span></div>
+            <div class="n-body">
+              <span class="n-tag nt-e">পরীক্ষা</span>
+              <div class="n-title">এইচএসসি প্রাক-নির্বাচনী পরীক্ষার রুটিন প্রকাশিত হয়েছে</div>
+              <div class="n-sub">সকল পরীক্ষার্থীদের নির্ধারিত সময়ে উপস্থিত থাকতে হবে</div>
+            </div>
+          </li>
+
+          <li class="n-row">
+            <div class="n-date"><span class="n-day">[তা]</span><span class="n-month">[মাস]</span></div>
+            <div class="n-body">
+              <span class="n-tag nt-r">ফলাফল</span>
+              <div class="n-title">প্রথম সাময়িক পরীক্ষার ফলাফল প্রকাশিত হয়েছে</div>
+              <div class="n-sub">ফলাফল সংগ্রহ করতে কলেজ অফিসে যোগাযোগ করুন</div>
+            </div>
+          </li>
+
+          <li class="n-row">
+            <div class="n-date"><span class="n-day">[তা]</span><span class="n-month">[মাস]</span></div>
+            <div class="n-body">
+              <span class="n-tag nt-h">ছুটি</span>
+              <div class="n-title">[ছুটির নাম] উপলক্ষে [তারিখ] থেকে [তারিখ] পর্যন্ত কলেজ বন্ধ থাকবে</div>
+              <div class="n-sub">পুনরায় ক্লাস শুরু হবে [তারিখ] থেকে</div>
+            </div>
+          </li>
+
+          <li class="n-row">
+            <div class="n-date"><span class="n-day">[তা]</span><span class="n-month">[মাস]</span></div>
+            <div class="n-body">
+              <span class="n-tag nt-g">সাধারণ</span>
+              <div class="n-title">বার্ষিক ক্রীড়া প্রতিযোগিতা [তারিখে] অনুষ্ঠিত হবে</div>
+              <div class="n-sub">সকল শিক্ষার্থী ও অভিভাবকদের উপস্থিত থাকার অনুরোধ</div>
+            </div>
+          </li>
+
+          <li class="n-row">
+            <div class="n-date"><span class="n-day">[তা]</span><span class="n-month">[মাস]</span></div>
+            <div class="n-body">
+              <span class="n-tag nt-e">পরীক্ষা</span>
+              <div class="n-title">এইচএসসি ফরম পূরণের শেষ তারিখ [তারিখ]</div>
+              <div class="n-sub">নির্ধারিত সময়ের মধ্যে ফরম পূরণ সম্পন্ন করুন</div>
+            </div>
+          </li>
+
+          <li class="n-row">
+            <div class="n-date"><span class="n-day">[তা]</span><span class="n-month">[মাস]</span></div>
+            <div class="n-body">
+              <span class="n-tag nt-g">সাধারণ</span>
+              <div class="n-title">অভিভাবক সমাবেশ [তারিখ ও সময়ে] অনুষ্ঠিত হবে</div>
+              <div class="n-sub">সকল অভিভাবকদের উপস্থিত থাকার বিনীত অনুরোধ</div>
+            </div>
+          </li>
+
+          <!-- ✏️ নতুন নোটিশ এখানে যোগ করুন -->
+
+        </ul>
+      </div>
+    </section>
+
+    <!-- ADMISSION -->
+    <section id="admission" class="mb">
+      <div class="sec-head"><div class="sec-bar"></div><h2>ভর্তি তথ্য</h2><div class="sec-line"></div></div>
+      <div class="card">
+        <div class="card-head ch-green"><span>🎓</span> ২০২৫-২৬ শিক্ষাবর্ষ ভর্তি বিজ্ঞপ্তি</div>
+        <div class="adm-grid">
+          <!-- ✏️ ভর্তি তথ্য পরিবর্তন করুন -->
+          <div class="adm-item"><div class="adm-lbl">শ্রেণি</div><div class="adm-val">একাদশ ও দ্বাদশ</div></div>
+          <div class="adm-item"><div class="adm-lbl">বিভাগ</div><div class="adm-val">মানবিক / ব্যবসায়</div></div>
+          <div class="adm-item"><div class="adm-lbl">ভর্তির সময়</div><div class="adm-val">[তারিখ] থেকে [তারিখ]</div></div>
+          <div class="adm-item"><div class="adm-lbl">ভর্তি ফি</div><div class="adm-val">***  টাকা</div></div>
+          <div class="adm-item"><div class="adm-lbl">যোগ্যতা</div><div class="adm-val">SSC / সমমান উত্তীর্ণ</div></div>
+          <div class="adm-item"><div class="adm-lbl">প্রয়োজনীয় কাগজ</div><div class="adm-val">মার্কশিট, সনদ, ছবি, জন্মনিবন্ধন</div></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="contact">
+
+    <div class="sw">
+      <div class="sw-head"><div class="sw-bar"></div> 📞 যোগাযোগ</div>
+      <div class="sw-body">
+        <ul class="ir-list">
+          <!-- ✏️ যোগাযোগের তথ্য পরিবর্তন করুন -->
+          <li class="ir-row"><span class="ir-l">📍 ঠিকানা</span><span class="ir-v">মোল্লাপাড়া, ওসমানীনগর, সিলেট </span></li>
+          <li class="ir-row"><span class="ir-l">📞 ফোন</span><span class="ir-v"> ০১৭২৮০০২৪৯৯</span></li>
+          <li class="ir-row"><span class="ir-l">✉ ইমেইল</span><span class="ir-v">amiahcollege@gmail.com</span></li>
+          <li class="ir-row"><span class="ir-l">🕐 সময়</span><span class="ir-v">রবি–বৃহস্পতি ১০টা–৩টা</span></li>
+        </ul>
+      </div>
     </div>
+
+    <div class="sw">
+      <div class="sw-head"><div class="sw-bar"></div> 🔗 দ্রুত লিংক</div>
+      <div class="sw-body">
+        <ul class="ql-list">
+          <li><a href="#notice"><span class="ql-icon">📢</span> নোটিশ বোর্ড</a></li>
+          <li><a href="#admission"><span class="ql-icon">🎓</span> ভর্তি তথ্য</a></li>
+          <li><a href="#faculty"><span class="ql-icon">👨‍🏫</span> শিক্ষকমণ্ডলী</a></li>
+          <li><a href="#leadership"><span class="ql-icon">🌟</span> নেতৃত্বমণ্ডলী</a></li>
+          <li><a href="#about"><span class="ql-icon">📖</span> কলেজ পরিচিতি</a></li>
+          <li><a href="#contact"><span class="ql-icon">📍</span> যোগাযোগ</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sw">
+      <div class="sw-head"><div class="sw-bar"></div> 📅 একাডেমিক ক্যালেন্ডার</div>
+      <div class="sw-body">
+        <ul class="cal-list">
+          <!-- ✏️ ক্যালেন্ডার তথ্য পরিবর্তন করুন -->
+          <li class="cal-row"><div class="cal-dot cd-b"></div><div><div class="cal-t">১ম সাময়িক পরীক্ষা</div><div class="cal-d">[মাস ও সাল]</div></div></li>
+          <li class="cal-row"><div class="cal-dot cd-b"></div><div><div class="cal-t">২য় সাময়িক পরীক্ষা</div><div class="cal-d">[মাস ও সাল]</div></div></li>
+          <li class="cal-row"><div class="cal-dot cd-r"></div><div><div class="cal-t">প্রাক-নির্বাচনী পরীক্ষা</div><div class="cal-d">[মাস ও সাল]</div></div></li>
+          <li class="cal-row"><div class="cal-dot cd-g"></div><div><div class="cal-t">ঈদুল ফিতর ছুটি</div><div class="cal-d">[তারিখ]</div></div></li>
+          <li class="cal-row"><div class="cal-dot cd-g"></div><div><div class="cal-t">গ্রীষ্মকালীন ছুটি</div><div class="cal-d">[তারিখ]</div></div></li>
+          <li class="cal-row"><div class="cal-dot cd-y"></div><div><div class="cal-t">বার্ষিক ক্রীড়া</div><div class="cal-d">[তারিখ]</div></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sw">
+      <div class="sw-head"><div class="sw-bar"></div> 📊 কলেজ পরিসংখ্যান</div>
+      <div class="sw-body">
+        <ul class="sr-list">
+          <li class="sr-row"><span class="sr-lbl">প্রভাষক</span><div class="sr-bw"><div class="sr-b" style="width:79%"></div></div><span class="sr-val">১১</span></li>
+          <li class="sr-row"><span class="sr-lbl">অধ্যক্ষ</span><div class="sr-bw"><div class="sr-b" style="width:9%"></div></div><span class="sr-val">১</span></li>
+          <li class="sr-row"><span class="sr-lbl">সভাপতি</span><div class="sr-bw"><div class="sr-b" style="width:9%"></div></div><span class="sr-val">১</span></li>
+          <li class="sr-row"><span class="sr-lbl">হিসাবরক্ষক</span><div class="sr-bw"><div class="sr-b" style="width:9%"></div></div><span class="sr-val">১</span></li>
+          <li class="sr-row"><span class="sr-lbl">মোট কর্মী</span><div class="sr-bw"><div class="sr-b" style="width:100%"></div></div><span class="sr-val">১৪</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </aside>
 </div>
 
-    <!----------Admission Section----------->
-
-<br>
-    <br>
-    <br>
-
-    <!-------Result------->
-<div id="result">
-   
-
-    <div class="container">
-        <h2>Result</h2>
-        <input type="text" id="roll" placeholder="Enter Roll Number">
-        <input type="text" id="reg" placeholder="Enter Registration Number">
-        <button onclick="searchResult()">Search</button>
-        <div id="result"></div>
+<!-- FOOTER -->
+<footer>
+  <div class="ft">
+    <div>
+      <h4>📚 মোল্লাপাড়া হাজী আব্দু মিয়া কলেজ</h4>
+      <p>জ্ঞান ও মেধার পথে এগিয়ে চলি। আমরা প্রতিশ্রুতিবদ্ধ একটি মানসম্পন্ন শিক্ষার পরিবেশ গড়ে তুলতে যেখানে প্রতিটি শিক্ষার্থী তার সম্ভাবনার সর্বোচ্চ বিকাশ ঘটাতে পারে।</p>
     </div>
-
-    <script>
-        function searchResult() {
-            var roll = document.getElementById("roll").value;
-            var reg = document.getElementById("reg").value;
-            var resultDiv = document.getElementById("result");
-
-            if (!roll || !reg) {
-                resultDiv.innerHTML = "<p style='color: red;'>Please enter both Roll and Registration Number.</p>";
-                return;
-            }
-
-            fetch("https://script.google.com/macros/s/AKfycbzZJpcJZhexeT3FqtqZgRSAEMSI19KN5IScB6W668jsJRpWHoolyrx6TdOdWvGGIzmIkA/exec?roll=" + roll + "&reg=" + reg)
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    resultDiv.innerHTML = "<p style='color: red;'>" + data.error + "</p>";
-                } else {
-                    resultDiv.innerHTML = `
-                        <table>
-                            <tr><th>Name</th><td>${data.name}</td></tr>
-                            <tr><th>Bangla</th><td>${data.bangla}</td></tr>
-                            <tr><th>English</th><td>${data.english}</td></tr>
-                            <tr><th>Economics</th><td>${data.economics}</td></tr>
-                            <tr><th>ICT</th><td>${data.ict}</td></tr>
-                            <tr><th>Civics/Business Org.</th><td>${data.civicsOrAccounting}</td></tr>
-                            <tr><th>Sociology/Accounting</th><td>${data.sociologyOrPManagement}</td></tr>
-                            <tr><th>History/Logic/Production Management</th><td>${data.historyLogicBusiness}</td></tr>
-                            <tr><th>GPA</th><td>${data.gpa}</td></tr>
-                            <tr><th>Grade</th><td>${data.grade}</td></tr>
-                        </table>
-                    `;
-                }
-            })
-            .catch(error => {
-                resultDiv.innerHTML = "<p style='color: red;'>Error fetching data.</p>";
-            });
-        }
-    </script>
-
-</div>
-
-<br>
-    <br>
-    <br>
-<!--------------contact---------->
-
-<div id="contact">
-    <div class="container">
-        <div class="row">
-            <div class="contact-left">
-                <h1 class="sub-title">Contact </h1>
-                <p><i class="fa-solid fa-envelope"></i>amiahcollege@gmail.com</p>
-                <p><i class="fa-solid fa-phone"></i>+8801309137660</p>
-                <div class="social-icons">
-                    <a href="https://www.facebook.com/share/1BcMqyq9pv/"><i class="fa-brands fa-facebook"></i></a>
-                    
-                </div>
-                
-            </div>
-
-             
-        </div>
+    <div>
+      <h4>🔗 সাইটম্যাপ</h4>
+      <ul>
+        <li><a href="#home">হোম</a></li>
+        <li><a href="#about">কলেজ পরিচিতি</a></li>
+        <li><a href="#leadership">নেতৃত্বমণ্ডলী</a></li>
+        <li><a href="#faculty">শিক্ষকমণ্ডলী</a></li>
+        <li><a href="#notice">নোটিশ বোর্ড</a></li>
+        <li><a href="#admission">ভর্তি তথ্য</a></li>
+      </ul>
     </div>
-   
-</div>
-
-<div class="copyright">
-    <p>Copyright ©2025 by Bishwambar CB Joy (All Right Reserved)</p>
-</div>  
-
-<script>
-
-    var tablinks = document.getElementsByClassName("tab-links");
-    var tabcontentes = document.getElementsByClassName("tab-contentes");
-    function opentab(tabname){
-        for(tablink of tablinks){
-            tablink.classList.remove("active-link");
-        }
-        for(tabcontent of tabcontentes){
-            tabcontent.classList.remove("active-tab");
-        }
-        event.currentTarget.classList.add("active-link");
-        document.getElementById(tabname).classList.add("active-tab");
+    <div>
+      <h4>📋 বিভাগসমূহ</h4>
+      <ul>
         
-        }
-
-</script>
+        <li>মানবিক বিভাগ</li>
+        <li>ব্যবসায় শিক্ষা বিভাগ</li>
+      </ul>
+    </div>
+    <div>
+      <h4>📞 যোগাযোগ</h4>
+      <p>📍 মোল্লাপাড়া, ওসমানীনগর, সিলেট,  বাংলাদেশ</p>
+      <p>📞 ০১৭২৮০০২৪৯৯</p>
+      <p>✉ amiahcollege@gmail.com</p>
+      <p>🕐 রবি–বৃহস্পতি: ১০টা–৩টা</p>
+    </div>
+  </div>
+  <div class="fb">
+    <span>© ২০২৬ মোল্লাপাড়া হাজী আব্দু মিয়া কলেজ। সর্বস্বত্ব সংরক্ষিত।</span>
+    <span>ওয়েবসাইট রক্ষণাবেক্ষণ: কলেজ কর্তৃপক্ষ</span>
+  </div>
+</footer>
 
 <script>
-   
-   var sidemenu = document.getElementById("sidemenu");
-
-   function openmenu(){
-        sidemenu.style.right = "0";
-   }
-   function closemenu(){
-    sidemenu.style.right = "-200px";
-   }
-
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+  const navLinks = document.querySelectorAll('nav a');
+  const ids = ['home','about','leadership','faculty','notice','admission','contact'];
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    ids.forEach(id => { const el = document.getElementById(id); if (el && window.scrollY >= el.offsetTop - 130) cur = id; });
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+  });
 </script>
-
 </body>
 </html>
-
-
-
-<!--@media only screen and (max-width: 600px){ 
-    #header{
-        background-image: url(background.jpeg);
-        margin-top: -300px;
-        background-repeat: no-repeat;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -moz-background-size: cover;
-        background-size: 100%;
-        background-position: center;
-
-    }-->
