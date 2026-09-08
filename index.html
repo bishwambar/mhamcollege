@@ -37,7 +37,8 @@
     /* HEADER */
     header { background: var(--white); border-bottom: 1px solid #dce4f5; box-shadow: var(--shadow-sm); }
     .header-inner { max-width: 1200px; margin: 0 auto; padding: 20px 32px; display: flex; align-items: center; gap: 22px; }
-    .college-crest { width: 86px; height: 86px; flex-shrink: 0; background: linear-gradient(145deg, var(--navy) 0%, var(--blue) 100%); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 4px solid var(--accent); box-shadow: 0 0 0 2px var(--navy), 0 6px 20px rgba(13,43,94,0.25); }
+    .college-crest { width: 86px; height: 86px; flex-shrink: 0; background: linear-gradient(145deg, var(--navy) 0%, var(--blue) 100%); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 4px solid var(--accent); box-shadow: 0 0 0 2px var(--navy), 0 6px 20px rgba(13,43,94,0.25); overflow: hidden; position: relative; }
+    .college-crest img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
     .crest-book { font-size: 1.9rem; line-height: 1; }
     .crest-year { font-size: 0.58rem; color: var(--accent-light); font-weight: 600; letter-spacing: 0.08em; margin-top: 3px; }
     .header-text { flex: 1; }
@@ -109,7 +110,8 @@
     .lc { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid #dce4f5; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; text-align: center; }
     .lc:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
     .lc-top { padding: 26px 18px 14px; background: linear-gradient(160deg, var(--offwhite), var(--gray-light)); }
-    .lc-av { width: 76px; height: 76px; border-radius: 50%; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-family: 'Noto Serif Bengali', serif; font-size: 1.7rem; font-weight: 700; color: white; box-shadow: 0 4px 16px rgba(0,0,0,0.18); }
+    .lc-av { width: 76px; height: 76px; border-radius: 50%; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-family: 'Noto Serif Bengali', serif; font-size: 1.7rem; font-weight: 700; color: white; box-shadow: 0 4px 16px rgba(0,0,0,0.18); overflow: hidden; }
+    .lc-av img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
     .av-p { background: linear-gradient(145deg, #0d2b5e, #2563b0); }
     .av-f { background: linear-gradient(145deg, #7c1d1d, #c0392b); }
     .av-a { background: linear-gradient(145deg, #1a5030, #2e8b57); }
@@ -127,7 +129,8 @@
     .fc::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--blue), var(--accent)); border-radius: 0 0 var(--radius) var(--radius); opacity: 0; transition: opacity 0.2s; }
     .fc:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
     .fc:hover::after { opacity: 1; }
-    .fc-num { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(145deg, var(--navy-mid), var(--blue-light)); color: white; font-family: 'Noto Serif Bengali', serif; font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 11px; box-shadow: 0 4px 12px rgba(37,99,176,0.22); }
+    .fc-num { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(145deg, var(--navy-mid), var(--blue-light)); color: white; font-family: 'Noto Serif Bengali', serif; font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 11px; box-shadow: 0 4px 12px rgba(37,99,176,0.22); overflow: hidden; }
+    .fc-num img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
     .fc-badge { font-size: 0.63rem; font-weight: 700; background: var(--gray-light); color: var(--navy); padding: 2px 9px; border-radius: 20px; display: inline-block; margin-bottom: 7px; }
     .fc-name { font-family: 'Noto Serif Bengali', serif; font-size: 0.88rem; font-weight: 700; color: var(--navy); line-height: 1.4; margin-bottom: 4px; }
     .fc-sub { font-size: 0.73rem; color: var(--blue); font-weight: 500; margin-bottom: 3px; }
@@ -135,8 +138,8 @@
 
     /* NOTICE */
     .n-list { list-style: none; }
-    .n-row { display: flex; align-items: flex-start; gap: 14px; padding: 14px 24px; border-bottom: 1px solid var(--gray-light); transition: background 0.15s; }
-    .n-row:last-child { border-bottom: none; }
+    .n-row { display: flex; align-items: center; gap: 14px; padding: 14px 24px; border-bottom: 1px solid var(--gray-light); transition: background 0.15s; }
+    .n-list li:last-child .n-row { border-bottom: none; }
     .n-row:hover { background: #f0f4fb; }
     .n-date { flex-shrink: 0; background: var(--navy); color: white; border-radius: 6px; padding: 6px 10px; text-align: center; min-width: 50px; }
     .n-day { font-family: 'Noto Serif Bengali', serif; font-size: 1.1rem; font-weight: 700; line-height: 1; display: block; }
@@ -150,6 +153,9 @@
     .nt-r { background: #f3e8fd; color: #6b2fa0; }
     .n-title { font-size: 0.87rem; font-weight: 600; color: var(--text); line-height: 1.5; margin-bottom: 2px; }
     .n-sub { font-size: 0.73rem; color: var(--text-light); }
+    a.n-row { text-decoration: none; color: inherit; cursor: pointer; }
+    .n-pdf { flex-shrink: 0; align-self: center; font-size: 0.7rem; font-weight: 700; color: var(--blue); background: #e8f4fd; padding: 6px 11px; border-radius: 6px; white-space: nowrap; }
+    a.n-row:hover .n-pdf { background: var(--blue); color: white; }
 
     /* ADMISSION */
     .adm-grid { display: grid; grid-template-columns: 1fr 1fr; }
@@ -251,7 +257,9 @@
 <header>
   <div class="header-inner">
     <div class="college-crest">
-      
+      <!-- ✏️ কলেজের লোগো যোগ করতে: ১) লোগো ছবিটি "images" ফোল্ডারে রাখুন (যেমন images/logo.png) ২) নিচের img লাইনটিকে কমেন্ট থেকে বের করে দিন (কমেন্টের চিহ্নগুলো মুছে দিন) ৩) src এর লিংক আপনার ছবির নাম অনুযায়ী বদলান ৪) লোগো যোগ করলে নিচের 🏛️ আইকন ও EST লেখাটি মুছে দিতে পারেন (ঐচ্ছিক) -->
+      <!-- <img src="images/logo.png" alt="কলেজের লোগো"> -->
+      <span class="crest-book">🏛️</span>
       <span class="crest-year">EST. ২০১৪</span>
     </div>
     <div class="header-text">
@@ -274,7 +282,8 @@
   <div class="nav-inner">
     <a href="#home" class="active">হোম</a>
     <a href="#about">কলেজ পরিচিতি</a>
-    
+    <a href="#leadership">নেতৃত্বমণ্ডলী</a>
+    <a href="#founders">প্রতিষ্ঠাতাবৃন্দ</a>
     <a href="#faculty">শিক্ষকমণ্ডলী</a>
     <a href="#notice">নোটিশ বোর্ড</a>
     <a href="#admission">ভর্তি তথ্য</a>
@@ -334,90 +343,106 @@
     </section>
 
     <!-- LEADERSHIP -->
+    <!-- ✏️ ছবি যোগ করার নিয়ম: images/leaders ফোল্ডারে ছবি রাখুন, তারপর নিচের প্রতিটি lc-av এর মধ্যে থাকা কমেন্ট করা img লাইনটি চালু করুন (কমেন্ট চিহ্ন মুছে দিন) এবং তার নিচের অক্ষরটি (যেমন "অ") মুছে দিন। -->
     <section id="leadership" class="mb">
-      <div class="sec-head"><div class="sec-bar"></div><h2>নেতৃত্বমণ্ডলী</h2><div class="sec-line"></div></div>
+      <div class="sec-head"><div class="sec-bar"></div><h2></h2><div class="sec-line"></div></div>
       <div class="leader-grid">
 
         <!-- ✏️ অধ্যক্ষের তথ্য পরিবর্তন করুন -->
         <div class="lc">
           <div class="lc-top">
-            <div class="lc-av av-p">অ</div>
-            <span class="lc-role rp">অধ্যক্ষ</span>
-            <div class="lc-name">প্রফেসর মাহমুদ মিয়া</div>
+            <div class="lc-av av-p">
+              <!-- <img src="images/leaders/principal.jpg" alt="প্রফেসর মাহমুদ মিয়া"> -->
+              অ
+            </div>
+            <span class="lc-role rp">সভাপতি</span>
+            <div class="lc-name">মোঃ আব্দুছ ছবুর চৌধুরী</div>
           </div>
           <div class="lc-bot">
-            <strong>শিক্ষাগত যোগ্যতা:</strong>BCS<br>
-            <strong>বিষয়:</strong> সাধারন শিক্ষা <br>
-            <strong>অভিজ্ঞতা:</strong> ২৫ বছর<br>
-            <strong>ফোন:</strong> ০১৭১২০৭১৫৯৬
-          </div>
-        </div>
-
-        <!-- ✏️ প্রতিষ্ঠাতা তথ্য পরিবর্তন করুন -->
-        <div class="lc">
-          <div class="lc-top">
-            <div class="lc-av av-f">প</div>
-            <span class="lc-role rf">প্রতিষ্ঠাতা সভাপতি</span>
-            <div class="lc-name">আলহাজ্ব আওলাদ মিয়া</div>
-          </div>
-          <div class="lc-bot">
-            <br>
-            <strong>প্রতিষ্ঠাকাল:</strong> ২০১৪<br>
-            
-          </div>
-        </div>
-
-         <div class="lc">
-          <div class="lc-top">
-            <div class="lc-av av-f">প</div>
-            <span class="lc-role rf">প্রতিষ্ঠাতা সদস্য</span>
-            <div class="lc-name">মোঃ কাপ্তান মিয়া</div>
-          </div>
-          <div class="lc-bot">
-            <br>
-            <strong>প্রতিষ্ঠাকাল:</strong> ২০১৪<br>
-            
-          </div>
-        </div>
-
-         <div class="lc">
-          <div class="lc-top">
-            <div class="lc-av av-f">প</div>
-            <span class="lc-role rf">প্রতিষ্ঠাতা সদস্য</span>
-            <div class="lc-name">মোঃ সুরত মিয়া</div>
-          </div>
-          <div class="lc-bot">
-            <br>
-            <strong>প্রতিষ্ঠাকাল:</strong> ২০১৪<br>
-            
-          </div>
-        </div>
-
-         <div class="lc">
-          <div class="lc-top">
-            <div class="lc-av av-f">প</div>
-            <span class="lc-role rf">প্রতিষ্ঠাতা সদস্য</span>
-            <div class="lc-name">মোঃ আফরোজ মিয়া</div>
-          </div>
-          <div class="lc-bot">
-            <br>
-            <strong>প্রতিষ্ঠাকাল:</strong> ২০১৪<br>
-            
+           
           </div>
         </div>
 
         <!-- ✏️ হিসাবরক্ষকের তথ্য পরিবর্তন করুন -->
         <div class="lc">
           <div class="lc-top">
-            <div class="lc-av av-a">হি</div>
-            <span class="lc-role ra">হিসাবরক্ষক</span>
-            <div class="lc-name">তফোজ্জল হোসেন</div>
+            <div class="lc-av av-a">
+              <!-- <img src="images/leaders/accountant.jpg" alt="তফোজ্জল হোসেন"> -->
+              হি
+            </div>
+            <span class="lc-role ra">অধক্ষ্য</span>
+            <div class="lc-name">প্রফেসর মাহমুদ মিয়া</div>
           </div>
           <div class="lc-bot">
-           
-            <strong>অভিজ্ঞতা:</strong> ১৩ বছর<br>
-            
-            <strong>ফোন:</strong> ০১৭১৯৫৭৮৯৮৪ 
+ <strong>শিক্ষাগত যোগ্যতা:</strong>BCS<br>
+            <strong>বিষয়:</strong> সাধারন শিক্ষা <br>
+            <strong>অভিজ্ঞতা:</strong> ২৫ বছর<br>
+            <strong>ফোন:</strong> ০১৭১২০৭১৫৯৬
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FOUNDERS (প্রতিষ্ঠাতাবৃন্দ - আলাদা সেকশন, ছবি সহ) -->
+    <!-- ✏️ ছবি যোগ করার নিয়ম: images/leaders ফোল্ডারে ছবি রাখুন, তারপর প্রতিটি lc-av এর মধ্যে থাকা কমেন্ট করা img লাইনটি চালু করুন (কমেন্ট চিহ্ন মুছে দিন) এবং তার নিচের "প" অক্ষরটি মুছে দিন। নতুন প্রতিষ্ঠাতা সদস্য যোগ করতে পুরো .lc ব্লকটি কপি করে নিচে বসান। -->
+    <section id="founders" class="mb">
+      <div class="sec-head"><div class="sec-bar"></div><h2>প্রতিষ্ঠাতাবৃন্দ</h2><div class="sec-line"></div></div>
+      <div class="leader-grid">
+
+        <div class="lc">
+          <div class="lc-top">
+            <div class="lc-av av-f">
+              <!-- <img src="images/leaders/founder-president.jpg" alt="আলহাজ্ব আওলাদ মিয়া"> -->
+              প
+            </div>
+            <span class="lc-role rf">প্রতিষ্ঠাতা সভাপতি</span>
+            <div class="lc-name">আলহাজ্ব আওলাদ মিয়া</div>
+          </div>
+          <div class="lc-bot">
+            <strong>প্রতিষ্ঠাকাল:</strong> ২০১৪
+          </div>
+        </div>
+
+        <div class="lc">
+          <div class="lc-top">
+            <div class="lc-av av-f">
+              <!-- <img src="images/leaders/founder-1.jpg" alt="মোঃ কাপ্তান মিয়া"> -->
+              প
+            </div>
+            <span class="lc-role rf">প্রতিষ্ঠাতা সদস্য</span>
+            <div class="lc-name">মোঃ কাপ্তান মিয়া</div>
+          </div>
+          <div class="lc-bot">
+            <strong>প্রতিষ্ঠাকাল:</strong> ২০১৪
+          </div>
+        </div>
+
+        <div class="lc">
+          <div class="lc-top">
+            <div class="lc-av av-f">
+              <!-- <img src="images/leaders/founder-2.jpg" alt="মোঃ সুরত মিয়া"> -->
+              প
+            </div>
+            <span class="lc-role rf">প্রতিষ্ঠাতা সদস্য</span>
+            <div class="lc-name">মোঃ সুরত মিয়া</div>
+          </div>
+          <div class="lc-bot">
+            <strong>প্রতিষ্ঠাকাল:</strong> ২০১৪
+          </div>
+        </div>
+
+        <div class="lc">
+          <div class="lc-top">
+            <div class="lc-av av-f">
+              <!-- <img src="images/leaders/founder-3.jpg" alt="মোঃ আফরোজ মিয়া"> -->
+              প
+            </div>
+            <span class="lc-role rf">প্রতিষ্ঠাতা সদস্য</span>
+            <div class="lc-name">মোঃ আফরোজ মিয়া</div>
+          </div>
+          <div class="lc-bot">
+            <strong>প্রতিষ্ঠাকাল:</strong> ২০১৪
           </div>
         </div>
 
@@ -429,39 +454,39 @@
       <div class="sec-head"><div class="sec-bar"></div><h2>প্রভাষকমণ্ডলী</h2><div class="sec-line"></div></div>
       <div class="fc-grid">
 
-        <!-- ✏️ প্রতিটি প্রভাষকের নাম, বিষয় ও ডিগ্রি পরিবর্তন  -->
+        <!-- ✏️ প্রতিটি প্রভাষকের নাম, বিষয় ও ডিগ্রি পরিবর্তন করুন। ছবি যোগ করতে: images/faculty ফোল্ডারে ছবি রাখুন, তারপর প্রতিটি fc-num এর ভিতরের কমেন্ট করা img লাইনটি চালু করুন (কমেন্ট চিহ্ন মুছে দিন) এবং তার পাশের সংখ্যাটি মুছে দিন। -->
 
-        <div class="fc"><div class="fc-num">১</div><span class="fc-badge">প্রভাষক</span>
+        <div class="fc"><div class="fc-num"><!-- <img src="images/faculty/faculty-1.jpg" alt="প্রভাষকের ছবি"> -->১</div><span class="fc-badge">প্রভাষক</span>
           <div class="fc-name">কয়েছ উদ্দিন আহমদ</div><div class="fc-sub">বাংলা</div><div class="fc-edu"></div></div>
 
-        <div class="fc"><div class="fc-num">২</div><span class="fc-badge">প্রভাষক</span>
+        <div class="fc"><div class="fc-num"><!-- <img src="images/faculty/faculty-2.jpg" alt="প্রভাষকের ছবি"> -->২</div><span class="fc-badge">প্রভাষক</span>
           <div class="fc-name">রুবিনা বেগম</div><div class="fc-sub">অর্থনীতি</div><div class="fc-edu"></div></div>
 
-        <div class="fc"><div class="fc-num">৩</div><span class="fc-badge">প্রভাষক</span>
+        <div class="fc"><div class="fc-num"><!-- <img src="images/faculty/faculty-3.jpg" alt="প্রভাষকের ছবি"> -->৩</div><span class="fc-badge">প্রভাষক</span>
           <div class="fc-name">মোঃ শাহীন আলম</div><div class="fc-sub">পৌরনীতি</div><div class="fc-edu"></div></div>
 
-        <div class="fc"><div class="fc-num">৪</div><span class="fc-badge">প্রভাষক</span>
+        <div class="fc"><div class="fc-num"><!-- <img src="images/faculty/faculty-4.jpg" alt="প্রভাষকের ছবি"> -->৪</div><span class="fc-badge">প্রভাষক</span>
           <div class="fc-name">মোঃ আলমগীর হোসেন</div><div class="fc-sub">উৎপাদন ব্যাবস্থাপনা</div><div class="fc-edu"></div></div>
 
-        <div class="fc"><div class="fc-num">৫</div><span class="fc-badge">প্রভাষক</span>
+        <div class="fc"><div class="fc-num"><!-- <img src="images/faculty/faculty-5.jpg" alt="প্রভাষকের ছবি"> -->৫</div><span class="fc-badge">প্রভাষক</span>
           <div class="fc-name">আল্লাম্মা ইকবাল মণ্ডল</div><div class="fc-sub">ইসলামের ইতিহাস ও সংস্কৃতি</div><div class="fc-edu"></div></div>
 
-        <div class="fc"><div class="fc-num">৬</div><span class="fc-badge">প্রভাষক</span>
+        <div class="fc"><div class="fc-num"><!-- <img src="images/faculty/faculty-6.jpg" alt="প্রভাষকের ছবি"> -->৬</div><span class="fc-badge">প্রভাষক</span>
           <div class="fc-name">মোঃ হেলাল উদ্দিন</div><div class="fc-sub">হিসাববিজ্ঞান</div><div class="fc-edu"></div></div>
 
-        <div class="fc"><div class="fc-num">৭</div><span class="fc-badge">প্রভাষক</span>
+        <div class="fc"><div class="fc-num"><!-- <img src="images/faculty/faculty-7.jpg" alt="প্রভাষকের ছবি"> -->৭</div><span class="fc-badge">প্রভাষক</span>
           <div class="fc-name">বিশ্বম্ভর চক্রবর্তী জয়</div><div class="fc-sub">তথ্য ও যোগাযোগ প্রযুক্তি</div><div class="fc-edu"></div></div>
 
-        <div class="fc"><div class="fc-num">৮</div><span class="fc-badge">প্রভাষক</span>
+        <div class="fc"><div class="fc-num"><!-- <img src="images/faculty/faculty-8.jpg" alt="প্রভাষকের ছবি"> -->৮</div><span class="fc-badge">প্রভাষক</span>
           <div class="fc-name">শংকর রায় </div><div class="fc-sub">ব্যাবসায় সংগঠন</div><div class="fc-edu"></div></div>
 
-        <div class="fc"><div class="fc-num">৯</div><span class="fc-badge">প্রভাষক</span>
+        <div class="fc"><div class="fc-num"><!-- <img src="images/faculty/faculty-9.jpg" alt="প্রভাষকের ছবি"> -->৯</div><span class="fc-badge">প্রভাষক</span>
           <div class="fc-name">তমাল বণিক</div><div class="fc-sub">সমাজবিজ্ঞান</div><div class="fc-edu"></div></div>
 
-        <div class="fc"><div class="fc-num">১০</div><span class="fc-badge">প্রভাষক</span>
+        <div class="fc"><div class="fc-num"><!-- <img src="images/faculty/faculty-10.jpg" alt="প্রভাষকের ছবি"> -->১০</div><span class="fc-badge">প্রভাষক</span>
           <div class="fc-name">ফাতেমা বেগম উষা</div><div class="fc-sub">যুক্তিবিদ্যা </div><div class="fc-edu"></div></div>
 
-        <div class="fc"><div class="fc-num">১১</div><span class="fc-badge">প্রভাষক</span>
+        <div class="fc"><div class="fc-num"><!-- <img src="images/faculty/faculty-11.jpg" alt="প্রভাষকের ছবি"> -->১১</div><span class="fc-badge">প্রভাষক</span>
           <div class="fc-name">পূজা রাণী নাথ</div><div class="fc-sub">ইংরেজী</div><div class="fc-edu"></div></div>
 
       </div>
@@ -475,56 +500,69 @@
         <ul class="n-list">
           <!--
           ✏️ নোটিশ যোগ বা পরিবর্তন করতে:
-          - নিচের <li class="n-row"> কপি করুন
+          - সাধারণ নোটিশ (ক্লিক করলে কিছু হবে না): <li><div class="n-row"> ... </div></li> কপি করুন
+          - পিডিএফ যোগ করা নোটিশ (ক্লিক করলে পিডিএফ ডাউনলোড হবে): <li><a class="n-row" href="notices/ফাইলের-নাম.pdf" download> ... <div class="n-pdf">📄 ডাউনলোড</div></a></li> কপি করুন
+          - পিডিএফ ফাইলগুলো "notices" ফোল্ডারে রাখুন এবং href এ সঠিক ফাইলের নাম বসান
           - n-tag class:  nt-u=জরুরি(লাল)  nt-e=পরীক্ষা(নীল)  nt-h=ছুটি(সবুজ)  nt-g=সাধারণ(হলুদ)  nt-r=ফলাফল(বেগুনি)
           - n-day ও n-month এ তারিখ দিন
           -->
 
-          <li class="n-row">
-            <div class="n-date"><span class="n-day">[২]</span><span class="n-month">[৯]</span></div>
-            <div class="n-body">
-              <span class="n-tag nt-u">জরুরি বিজ্ঞপ্তি</span>
-              <div class="n-title">২০২৬-২৭ শিক্ষাবর্ষে একাদশ শ্রেণিতে ভর্তি কার্যক্রম শুরু হয়েছে</div>
-              <div class="n-sub">বিস্তারিত জানতে কলেজ অফিসে যোগাযোগ করুন</div>
+          <!-- ✏️ উদাহরণ: পিডিএফ সহ নোটিশ - href এর ফাইলের নাম বদলে আপনার আসল পিডিএফ ফাইলের নাম বসান -->
+          <li>
+            <a class="n-row" href="notices/admission-notice.pdf" download>
+              <div class="n-date"><span class="n-day">[২]</span><span class="n-month">[৯]</span></div>
+              <div class="n-body">
+                <span class="n-tag nt-u">জরুরি বিজ্ঞপ্তি</span>
+                <div class="n-title">২০২৬-২৭ শিক্ষাবর্ষে একাদশ শ্রেণিতে ভর্তি কার্যক্রম শুরু হয়েছে</div>
+                <div class="n-sub">বিস্তারিত জানতে কলেজ অফিসে যোগাযোগ করুন</div>
+              </div>
+              <div class="n-pdf">📄 ডাউনলোড</div>
+            </a>
+          </li>
+
+          <li>
+            <div class="n-row">
+              <div class="n-date"><span class="n-day">[৭]</span><span class="n-month">[৯]</span></div>
+              <div class="n-body">
+                <span class="n-tag nt-e">পরীক্ষা</span>
+                <div class="n-title">এইচএসসি মডেল টেস্ট পরীক্ষার রুটিন প্রকাশিত হয়েছে</div>
+                <div class="n-sub">সকল পরীক্ষার্থীদের নির্ধারিত সময়ে উপস্থিত থাকতে হবে</div>
+              </div>
             </div>
           </li>
 
-          <li class="n-row">
-            <div class="n-date"><span class="n-day">[৭]</span><span class="n-month">[৯]</span></div>
-            <div class="n-body">
-              <span class="n-tag nt-e">পরীক্ষা</span>
-              <div class="n-title">এইচএসসি মডেল টেস্ট পরীক্ষার রুটিন প্রকাশিত হয়েছে</div>
-              <div class="n-sub">সকল পরীক্ষার্থীদের নির্ধারিত সময়ে উপস্থিত থাকতে হবে</div>
+          <li>
+            <div class="n-row">
+              <div class="n-date"><span class="n-day">[তা]</span><span class="n-month">[মাস]</span></div>
+              <div class="n-body">
+                <span class="n-tag nt-r">ফলাফল</span>
+                <div class="n-title">প্রথম সাময়িক পরীক্ষার ফলাফল প্রকাশিত হয়েছে</div>
+                <div class="n-sub">ফলাফল সংগ্রহ করতে কলেজ অফিসে যোগাযোগ করুন</div>
+              </div>
             </div>
           </li>
 
-          <li class="n-row">
-            <div class="n-date"><span class="n-day">[তা]</span><span class="n-month">[মাস]</span></div>
-            <div class="n-body">
-              <span class="n-tag nt-r">ফলাফল</span>
-              <div class="n-title">প্রথম সাময়িক পরীক্ষার ফলাফল প্রকাশিত হয়েছে</div>
-              <div class="n-sub">ফলাফল সংগ্রহ করতে কলেজ অফিসে যোগাযোগ করুন</div>
+          <li>
+            <div class="n-row">
+              <div class="n-date"><span class="n-day">[তা]</span><span class="n-month">[মাস]</span></div>
+              <div class="n-body">
+                <span class="n-tag nt-h">ছুটি</span>
+                <div class="n-title">[ছুটির নাম] উপলক্ষে [তারিখ] থেকে [তারিখ] পর্যন্ত কলেজ বন্ধ থাকবে</div>
+                <div class="n-sub">পুনরায় ক্লাস শুরু হবে [তারিখ] থেকে</div>
+              </div>
             </div>
           </li>
 
-          <li class="n-row">
-            <div class="n-date"><span class="n-day">[তা]</span><span class="n-month">[মাস]</span></div>
-            <div class="n-body">
-              <span class="n-tag nt-h">ছুটি</span>
-              <div class="n-title">[ছুটির নাম] উপলক্ষে [তারিখ] থেকে [তারিখ] পর্যন্ত কলেজ বন্ধ থাকবে</div>
-              <div class="n-sub">পুনরায় ক্লাস শুরু হবে [তারিখ] থেকে</div>
+          <li>
+            <div class="n-row">
+              <div class="n-date"><span class="n-day">[তা]</span><span class="n-month">[মাস]</span></div>
+              <div class="n-body">
+                <span class="n-tag nt-g">সাধারণ</span>
+                <div class="n-title">বার্ষিক ক্রীড়া প্রতিযোগিতা [তারিখে] অনুষ্ঠিত হবে</div>
+                <div class="n-sub">সকল শিক্ষার্থী ও অভিভাবকদের উপস্থিত থাকার অনুরোধ</div>
+              </div>
             </div>
           </li>
-
-          <li class="n-row">
-            <div class="n-date"><span class="n-day">[তা]</span><span class="n-month">[মাস]</span></div>
-            <div class="n-body">
-              <span class="n-tag nt-g">সাধারণ</span>
-              <div class="n-title">বার্ষিক ক্রীড়া প্রতিযোগিতা [তারিখে] অনুষ্ঠিত হবে</div>
-              <div class="n-sub">সকল শিক্ষার্থী ও অভিভাবকদের উপস্থিত থাকার অনুরোধ</div>
-            </div>
-          </li>
-
 
           <!-- ✏️ নতুন নোটিশ এখানে যোগ করুন -->
 
@@ -575,6 +613,7 @@
           <li><a href="#admission"><span class="ql-icon">🎓</span> ভর্তি তথ্য</a></li>
           <li><a href="#faculty"><span class="ql-icon">👨‍🏫</span> শিক্ষকমণ্ডলী</a></li>
           <li><a href="#leadership"><span class="ql-icon">🌟</span> নেতৃত্বমণ্ডলী</a></li>
+          <li><a href="#founders"><span class="ql-icon">🏆</span> প্রতিষ্ঠাতাবৃন্দ</a></li>
           <li><a href="#about"><span class="ql-icon">📖</span> কলেজ পরিচিতি</a></li>
           <li><a href="#contact"><span class="ql-icon">📍</span> যোগাযোগ</a></li>
         </ul>
@@ -625,6 +664,7 @@
         <li><a href="#home">হোম</a></li>
         <li><a href="#about">কলেজ পরিচিতি</a></li>
         <li><a href="#leadership">নেতৃত্বমণ্ডলী</a></li>
+        <li><a href="#founders">প্রতিষ্ঠাতাবৃন্দ</a></li>
         <li><a href="#faculty">শিক্ষকমণ্ডলী</a></li>
         <li><a href="#notice">নোটিশ বোর্ড</a></li>
         <li><a href="#admission">ভর্তি তথ্য</a></li>
@@ -660,7 +700,7 @@
     });
   });
   const navLinks = document.querySelectorAll('nav a');
-  const ids = ['home','about','leadership','faculty','notice','admission','contact'];
+  const ids = ['home','about','leadership','founders','faculty','notice','admission','contact'];
   window.addEventListener('scroll', () => {
     let cur = '';
     ids.forEach(id => { const el = document.getElementById(id); if (el && window.scrollY >= el.offsetTop - 130) cur = id; });
